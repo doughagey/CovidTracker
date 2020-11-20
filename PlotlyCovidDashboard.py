@@ -106,6 +106,7 @@ def update_graph(country, stat):
     fig.update_xaxes(showgrid=False) # hide x-axis gridlines
     fig.update_yaxes(showgrid=True)
     fig.update_layout(showlegend=False) # hide legend
+    fig.update_layout(width=600, height=500)
     fig.update_layout(
         xaxis=dict(
             tickmode='array',
