@@ -50,7 +50,6 @@ controls = dbc.Card(
                     value='Austria',
                     style={'color':'black'}
             )
-
             ]
         ),
         dbc.FormGroup(
@@ -71,7 +70,7 @@ controls = dbc.Card(
 
 app.layout = dbc.Container(
     [dbc.Row(
-            [html.H3("Worldwide COVID-19 Tracker")], justify="center", align="center"
+            [html.H4('')], justify="center", align="center"
             ), # This creates a header and center justifies it
         #html.Hr(),
         dbc.Row(
@@ -91,22 +90,20 @@ app.layout = dbc.Container(
 
 def update_graph(country, stat):
     filtered_df = df.loc[df['Country']==country]
-    #filtered_df['dateRep']= pd.to_datetime(filtered_df['dateRep'])
-    #filtered_df = filtered_df.sort_values(['countriesAndTerritories', "dateRep"], ascending = (True, True))
-    #filtered_df = filtered_df.reset_index(drop=True) # reset index or it screws the graph up
     filtered_df = filtered_df[::-1]  # without this the graph is backwards
     date_list = filtered_df['Date'].to_list()
     date_list = date_list[::30]
     print(date_list)# Only get every 4th value - we're going to use this for showing fewer tickers
     filtered_df['colour']='orange'
     colormap = {'orange':'orange', 'lightblue':'lightblue','darkskyblue':'darkskyblue'}
-    fig = px.area(filtered_df, x='Date', y=stat, template='plotly_dark',color='colour',color_discrete_map=colormap)
+    fig = px.area(filtered_df, x='Date', y=stat, template='plotly_dark',color='colour',color_discrete_map=colormap,
+                  title= 'Worldwide COVID-19 Tracker')
     fig.update_layout(title_font_family='Arial')
     fig.update_xaxes(tickangle=45, tickfont=dict(family='Arial', size=10))
     fig.update_xaxes(showgrid=False) # hide x-axis gridlines
     fig.update_yaxes(showgrid=True)
     fig.update_layout(showlegend=False) # hide legend
-    fig.update_layout(width=600, height=500)
+    fig.update_layout(width=600, height=450)
     fig.update_layout(
         xaxis=dict(
             tickmode='array',
@@ -119,5 +116,6 @@ def update_graph(country, stat):
 
     return fig
 
-app.run_server(debug=False
-               , use_reloader=False)
+if __name__ == "__main__":
+    app.run_server(debug=False
+                   , use_reloader=False)
