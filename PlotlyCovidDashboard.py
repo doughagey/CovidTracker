@@ -24,7 +24,8 @@ df = df[['Date','Daily Cases','Daily Deaths','Country', 'Population2019','Contin
 
 external_stylesheets = ['https://codepen.io/anon/pen/mardKv.css']
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY],
+                meta_tags=[{'name': 'viewport','content': 'width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=0.3,'}])
 
 ############################################################################################
 # Plot using a simple standard plotly express wind rose chart as it includes default styling
@@ -54,7 +55,7 @@ controls = dbc.Card(
         ),
         dbc.FormGroup(
             [
-                dbc.Label('Country:'),
+                dbc.Label('Statistic:'),
                 dcc.Dropdown(
                     id='Statistic',
                     options=[{'label': i, 'value': i} for i in stat],
