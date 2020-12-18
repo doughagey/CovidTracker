@@ -19,8 +19,8 @@ if response.status_code == 200:
 else:
     print('Error retrieving data from the internet....')
 
-df.columns = ['Date','Day','Month','Year','Daily Cases','Daily Deaths','Country', 'GeoId','Code','Population2019','Continent','14 Day Cases per 100,000']
-df = df[['Date','Daily Cases','Daily Deaths','Country', 'Population2019','Continent','14 Day Cases per 100,000']]
+df.columns = ['Date','Week','Weekly Cases','Weekly Deaths','Country', 'GeoId','Code','Population2019','Continent','14 Day Cases per 100,000']
+df = df[['Date','Weekly Cases','Weekly Deaths','Country', 'Population2019','Continent','14 Day Cases per 100,000']]
 
 external_stylesheets = ['https://codepen.io/anon/pen/mardKv.css']
 
@@ -38,7 +38,7 @@ continents_list = sorted(continents_list)
 countries = df['Country'].unique()
 countries_list = countries.tolist()
 countries_list = sorted(countries_list)
-stat = ['Daily Cases','Daily Deaths','14 Day Cases per 100,000']
+stat = ['Weekly Cases','Weekly Deaths','14 Day Cases per 100,000']
 
 controls = dbc.Card(
     [
@@ -59,7 +59,7 @@ controls = dbc.Card(
                 dcc.Dropdown(
                     id='Statistic',
                     options=[{'label': i, 'value': i} for i in stat],
-                    value='Daily Cases',
+                    value='14 Day Cases per 100,000',
                     style={'color':'black'}
                 )
 
